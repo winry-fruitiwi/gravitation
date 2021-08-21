@@ -1,15 +1,16 @@
 # based on Daniel's Mutual Gravitation video in p5.js
-# v0.0:   blank project with these version comments
-# v0.0:   basic mover class with main program shell, possibly edge check
-# v0.0:   fill in mover class, edge check optional
-# v0.0:   attractor
-# v0.0:   repulsor that inherits attractor
-# v0.0:   mutual gravitation
-# v0.0:   path tracing
-# v0.0:   emittion, get particles and/or trail
-# v0.0:   try to add P3D, Peasycam, and 3D gravitation with path tracing
-# v0.0:   colors!
+# v0.00:   blank project with these version comments
+# v0.01:   basic mover class with main program shell, possibly edge check
+# v0.02:   fill in mover class, edge check optional
+# v0.0:    attractor, maxspeed
+# v0.0:    repulsor that inherits attractor
+# v0.0:    mutual gravitation
+# v0.0:    path tracing
+# v0.0:    emittion, get particles and/or trail
+# v0.0:    try to add P3D, Peasycam, and 3D gravitation with path tracing
+# v0.0:    colors!
 from Star import *
+from Attractor import *
 
 
 def setup():
@@ -18,20 +19,30 @@ def setup():
     size(950, 1000)
     background(220, 79, 35)
     stars = []
-    
-    for i in range(1):
-        stars.append(Star(width/2, height/2))
-    
     attractors = []
     repulsors = []
+    
+    for i in range(1):
+        # stars.append(Star(random(80, width-80), random(10, height-10), random(2, 15)))
+        stars.append(Star(width/2, height/2, 5))
+    
+    for i in range(1):
+        attractors.append(Attractor(width/3, height/3, 40))
 
 
 def draw():
     global stars, attractors, repulsors
     background(220, 79, 35)
-    gravity = PVector(0, 1)
+    gravity = PVector(0, 0.1)
     
     for star in stars:
         star.show()
         star.update()
-        star.apply_force(gravity)
+        # star.apply_force(gravity)
+    
+    for attractor in attractors:
+        attractor.show()
+        attractor.apply_force(PVector.random2D().mult(0.1))
+        attractor.update()
+        for star in stars:
+            star.apply_force(attractor.attract(star))
