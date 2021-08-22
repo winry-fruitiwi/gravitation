@@ -14,11 +14,11 @@ class Attractor(Star):
         distance = PVector.sub(self.pos, star.pos)
         # we'll want to restrain the strength soon
         # the gravitational constant will help us keep things in check
-        G = 10
+        G = 100
         # strength uses Newton's Universal Law of Gravitation. This is the key
         # of this project. F_g = G * m_1 * m_2/r^2
         strength = G * (self.m * star.m)/(distance.magSq())
-        strength = constrain(strength, 10, 30)
+        strength = constrain(strength, 10, 40)
         return distance.setMag(strength)
     
     

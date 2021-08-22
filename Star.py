@@ -5,7 +5,7 @@
 class Star(object):
     def __init__(self, x, y, m):
         self.pos = PVector(x, y)
-        self.vel = PVector(0, 10)
+        self.vel = PVector(10, 10)
         self.acc = PVector(0, 0)
         self.m = m
         self.ms = random(10, 15) # max speed prevents things from getting lightfast!
@@ -14,7 +14,8 @@ class Star(object):
     
     def apply_force(self, force): # force is a PVector.
         # F = ma, so a = F/m.
-        self.acc.add(force).div(self.m)
+        # self.acc.add(force).div(self.m)
+        self.acc.add(PVector.div(force, self.m))
     
     
     def show(self):
