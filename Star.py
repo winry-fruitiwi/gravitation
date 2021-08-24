@@ -36,4 +36,6 @@ class Star(object):
     def update(self):
         self.pos.add(self.vel)
         self.vel.add(self.acc).limit(self.max_speed)
+        # if we don't reset the acceleration, the first tap on an object will make
+        # it fly around!
         self.acc = PVector(0, 0, 0)

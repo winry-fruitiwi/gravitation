@@ -7,7 +7,6 @@
 # v0.05:   mutual gravitation
 # v0.0:    try to add P3D, Peasycam, and 3D gravitation with path tracing
 # v0.0:    colors!
-# TODO: figure out the mystery of quadrant 2 appearances only
 
 # in order to use the PeasyCam object, I need to add the library! Note: cam.startHUD()
 # and cam.stopHUD() or perhaps cam.endHUD() is the way to make 2D items in 3D.
@@ -25,7 +24,7 @@ def setup():
     stars = []
     attractors = []
     repulsors = []
-    cam = PeasyCam(this, width/2, height/2, 0, 500)
+    cam = PeasyCam(this, 0, 0, 0, 500)
     
     '''
     for i in range(8):
@@ -41,15 +40,15 @@ def draw_axes():
     strokeWeight(1)
     # x-axis
     stroke(0, 80, 80, 100)
-    line(-4000, height/2, 4000, height/2)
+    line(-4000, 0, 4000, 0)
     
     # y-axis
     stroke(120, 80, 80, 100)
-    line(width/2, -4000, width/2, 4000)
+    line(0, -4000, 0, 4000)
     
     # z-axis
     stroke(201, 80, 80, 100)
-    line(width/2, height/2, 4000, width/2, height/2, -4000)
+    line(0, 0, -4000, 0, 0, 4000)
 
 
 def star_update():
