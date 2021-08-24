@@ -5,14 +5,15 @@
 class Star(object):
     def __init__(self, x, y, m):
         self.pos = PVector(x, y)
-        self.vel = PVector(10, 10)
+        self.vel = PVector(0, 0)
         self.acc = PVector(0, 0)
         self.m = m
-        self.ms = random(10, 15) # max speed prevents things from getting lightfast!
-        print "We made a star!"
+        self.max_speed = 4 # max speed prevents things from getting lightfast!
+        # print "We made a star!"
     
     
-    def apply_force(self, force): # force is a PVector.
+    # force is a PVector. This is the most boring part of the Star class.
+    def apply_force(self, force):
         # F = ma, so a = F/m.
         # self.acc.add(force).div(self.m)
         self.acc.add(PVector.div(force, self.m))
@@ -29,7 +30,9 @@ class Star(object):
         popMatrix()
     
     
+    # this updates the object's attributes. This is probably the second most boring part
+    # of the implementation.
     def update(self):
         self.pos.add(self.vel)
-        self.vel.add(self.acc).limit(self.ms)
+        self.vel.add(self.acc).limit(self.max_speed)
         self.acc = PVector(0, 0)

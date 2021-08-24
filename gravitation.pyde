@@ -23,20 +23,17 @@ def setup():
     attractors = []
     repulsors = []
     
+    '''
     for i in range(8):
         # stars.append(Star(random(80, width-80), random(10, height-10), random(2, 15)))
         stars.append(Star(random(100, width-100), random(100, height-100), random(5, 15)))
+    '''
     
-    # for i in range(1):
-    #     attractors.append(Attractor(width/2, height/2, 20))
+    for i in range(1):
+        attractors.append(Attractor(width/2, height/2, random(8, 16)))
 
 
-def draw():
-    global stars, attractors, repulsors
-    background(220, 79, 35)
-    gravity = PVector(0, 0.1)
-    
-    
+def star_update():
     for star in stars:
         star.show()
         star.update()
@@ -50,13 +47,28 @@ def draw():
             repulsor.show()
 
 
+def draw():
+    global stars, attractors, repulsors
+    background(220, 79, 35)
+    gravity = PVector(0, 0.1)
+    
+    
+    for i in range(len(attractors)):
+        # list[~i] is the same as list[i]!
+        for attracted_attractor in attractors:
+            attractor = attractors[i]
+            attracted_attractor.apply_force(attractor.attract(attracted_attractor))
+            attractor.show()
+            attractor.update()
+
+
 def mousePressed():
     global attractors, repulsors, stars
     if mouseButton == LEFT:
-        attractors.append(Attractor(mouseX, mouseY, 20))
+        attractors.append(Attractor(mouseX, mouseY, random(8, 16)))
     
-    if mouseButton == RIGHT:
-        repulsors.append(Repulsor(mouseX, mouseY, 20))
+    # if mouseButton == RIGHT:
+    #     repulsors.append(Repulsor(mouseX, mouseY, random(8, 16)))
     
-    for i in range(3):
-        stars.append(Star(random(100, width-100), random(100, height-100), random(5, 15)))
+    # for i in range(3):
+    #     stars.append(Star(random(100, width-100), random(100, height-100), random(5, 15)))

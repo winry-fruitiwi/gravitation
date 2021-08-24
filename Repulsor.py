@@ -3,11 +3,9 @@ from Attractor import *
 
 
 class Repulsor(Attractor):
-    def __init__(self, x, y, m):
-        super(Repulsor, self).__init__(x, y, m)
-    
-    
-    def repulse(self, star): # assume star is a Star object. Confusing!
+    # We don't even need an __init__() because everything is already inherited!
+    # assume star is a Star object. This is the opposite of attract.
+    def repulse(self, star): 
         return self.attract(star).mult(-1)
     
     
