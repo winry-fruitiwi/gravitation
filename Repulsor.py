@@ -12,7 +12,7 @@ class Repulsor(Attractor):
     def show(self):
         pushMatrix()
         
-        translate(self.pos.x, self.pos.y)
+        translate(self.pos.x, self.pos.y, self.pos.z)
         fill(0, 80, 80, 80)
         circle(0, 0, self.m*2)
         

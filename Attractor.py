@@ -3,10 +3,8 @@ from Star import *
 
 
 class Attractor(Star):
-    def __init__(self, x, y, m):
-        super(Attractor, self).__init__(x, y, m)
-        print "we made an attractor at " + str(self.pos)
-        self.vel = PVector(0, 0)
+    def __init__(self, x, y, z, m):
+        super(Attractor, self).__init__(x, y, z, m)
     
     
     def attract(self, star): # star is a Star class, so it has a pos.x and pos.y!
@@ -22,7 +20,7 @@ class Attractor(Star):
         try:
             strength = G * (self.m * star.m)/(distance.magSq())
         except ZeroDivisionError:
-            return PVector(0, 0)
+            return PVector(0, 0, 0)
         
         # The lower bound of constrain prevents things from drifting away, while the
         # higher bound prevents things from being launched into heaven
@@ -33,8 +31,9 @@ class Attractor(Star):
     def show(self):
         pushMatrix()
         
-        translate(self.pos.x, self.pos.y)
+        translate(self.pos.x, self.pos.y, self.pos.z)
+        stroke(120, 80, 60, 80)
         fill(120, 80, 80, 80)
-        circle(0, 0, self.m*2)
+        sphere(self.m*2)
         
         popMatrix()

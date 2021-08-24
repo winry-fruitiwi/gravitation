@@ -3,10 +3,10 @@
 
 
 class Star(object):
-    def __init__(self, x, y, m):
-        self.pos = PVector(x, y)
-        self.vel = PVector(0, 0)
-        self.acc = PVector(0, 0)
+    def __init__(self, x, y, z, m):
+        self.pos = PVector(x, y, z)
+        self.vel = PVector(0, 0, 0)
+        self.acc = PVector(0, 0, 0)
         self.m = m
         self.max_speed = 4 # max speed prevents things from getting lightfast!
         # print "We made a star!"
@@ -21,8 +21,9 @@ class Star(object):
     
     def show(self):
         pushMatrix()
-        translate(self.pos.x, self.pos.y)
+        translate(self.pos.x, self.pos.y, self.pos.z)
         
+        # draw a circle or sphere in white
         noStroke()
         fill(0, 0, 100, 80)
         circle(0, 0, self.m*2)
@@ -35,4 +36,4 @@ class Star(object):
     def update(self):
         self.pos.add(self.vel)
         self.vel.add(self.acc).limit(self.max_speed)
-        self.acc = PVector(0, 0)
+        self.acc = PVector(0, 0, 0)
